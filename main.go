@@ -22,7 +22,7 @@ func main() {
 	// Defines a Group of routes for V1 versioning
 	group := r.Group("/v1")
 	{
-		group.GET("/insulina/:value", controller.AddRegistry)
+		group.GET("/insulina/:value/:dose", controller.AddRegistry)
 	}
 
 	r.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))

@@ -24,13 +24,13 @@ func AddRegistry(ctx *gin.Context) {
 	}
 
 	// Sets needed generic values to new row
-	rangeValue := "A:C"
+	rangeValue := "A:D"
 	date := time.Now().Format("2006-01-02 15:04:05")
 	month := time.Now().Month().String()
 
 	// Defines the values to be written
 	values := [][]interface{}{
-		{ctx.Param("value"), date, month},
+		{ctx.Param("value"), date, month, ctx.Param("dose")},
 	}
 
 	// Creates the value range object
