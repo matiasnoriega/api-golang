@@ -24,8 +24,13 @@ func AddRegistry(ctx *gin.Context) {
 	}
 
 	// Sets needed generic values to new row
+
+	// Create a custom fixed timezone offset for GMT-3 (UTC-3)
+	zoneOffset := -3 * 60 * 60 // -3 hours in seconds
+	timezone := time.FixedZone("GMT-3", zoneOffset)
+
 	rangeValue := "A:D"
-	date := time.Now().Format("2006-01-02 15:04:05")
+	date := time.Now().In(timezone).Format("2006-01-02 15:04:05")
 	month := time.Now().Month().String()
 
 	// Defines the values to be written
