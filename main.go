@@ -23,6 +23,9 @@ func main() {
 	group := r.Group("/v1")
 	{
 		group.GET("/insulina/:value/:dose", controller.AddRegistry)
+		group.GET("/ping", func(ctx *gin.Context){
+			ctx.JSON(200,"pong")
+		})
 	}
 
 	r.Run(fmt.Sprintf(":%s", os.Getenv("PORT")))
