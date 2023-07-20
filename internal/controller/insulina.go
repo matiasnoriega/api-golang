@@ -2,6 +2,7 @@ package controller
 
 import (
 	"api-golang/pkg/models"
+	"api-golang/pkg/utils"
 	"context"
 	"fmt"
 	"os"
@@ -52,6 +53,6 @@ func AddRegistry(ctx *gin.Context) {
 	}
 
 	// If everything is OK returns an success message
-	response := models.InsulinaResponse{Msg: "SUCCESS", Data: fmt.Sprintf("Data added to Google Sheet successfully. Value: %s", ctx.Param("value"))}
+	response := models.InsulinaResponse{Msg: "SUCCESS", Data: utils.MeasurementStatus(ctx.Param("value"))}
 	ctx.JSON(200, response)
 }
