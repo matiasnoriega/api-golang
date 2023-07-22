@@ -2,7 +2,6 @@ package controller
 
 import (
 	"api-golang/pkg/models"
-	"api-golang/pkg/utils"
 	"context"
 	"fmt"
 	"os"
@@ -47,12 +46,12 @@ func AddRegistry(ctx *gin.Context) {
 	// Make the API call to write data to the Google Sheet
 	_, err = sheetsService.Spreadsheets.Values.Append(os.Getenv("SPREADSHEET_ID"), rangeValue, valueRange).ValueInputOption("USER_ENTERED").Do()
 	if err != nil {
-		response := models.InsulinaResponse{Msg: "ERROR", Data: fmt.Sprintf("Failed to update data to sheet: %v", err)}
+		response := models.InsulinaResponse{Msg: fmt.Sprintf("Failed to update data to sheet: %v", err)}
 		ctx.JSON(500, response)
 		return
 	}
 
 	// If everything is OK returns an success message
-	response := models.InsulinaResponse{Msg: "SUCCESS", Data: utils.MeasurementStatus(ctx.Param("value"))}
+	response := models.InsulinaResponse{Msg: "Sheet updated successfully"}
 	ctx.JSON(200, response)
 }
